@@ -1,3 +1,6 @@
+# added - sky, arm & arm animation, break sound
+# changes - player height
+
 # imports
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
@@ -10,6 +13,9 @@ cobblestone = load_texture('textures/cobblestone.png')
 oak_wood = load_texture('textures/oak_wood.jpg')
 brick = load_texture('textures/brick.png')
 chosen_block = 1
+sky = load_texture('textures/sky-2.jpg')
+arm = load_texture('textures/arm_texture.png')
+punch_sound = Audio('sounds/lego_breaking.mp3', loop=False, autoplay=False)
 
 
 # a function that always called
@@ -23,6 +29,13 @@ def update():
         chosen_block = 3
     elif held_keys['4']:
         chosen_block = 4
+
+    if held_keys['left mouse'] or held_keys['right mouse']:
+        arm_obj.position = (0.4, -0.4)
+        punch_sound.play()
+    else:
+        arm_obj.position = (0.5, -0.6)
+        punch_sound.play()
 
 
 # Define a Voxel class.
@@ -57,9 +70,29 @@ class Voxel(Button):
                 destroy(self)
 
 
+class Sky(Entity):
+    def __init__(self):
+        super().__init__(parent=scene, model='sphere', texture=sky, scale=150, double_sided=True)
+
+
+class Hand(Entity):
+    def __init__(self):
+        super().__init__(
+            parent=camera.ui,
+            model='cube',
+            color=color.blue,
+            scale=(0.3, 0.3, 2),
+            rotation=Vec3(150, -10, 5),
+            position=Vec2(0.5, -0.6))
+
+
 for z in range(16):
     for x in range(16):
         voxel = Voxel(position=(x, 0, z))
 
-player = FirstPersonController()
+player = FirstPersonController(scale=(1, 0.8, 1))
+
+sky_obj = Sky()
+arm_obj = Hand()
 app.run()
+
