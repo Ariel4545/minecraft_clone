@@ -1,6 +1,3 @@
-# added - the world twice big, dirt texture, cobblestone block
-# code - reformatted
-
 # imports
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
@@ -10,6 +7,8 @@ app = Ursina()
 # import the textures
 dirt = load_texture('textures/dirt.jpg')
 cobblestone = load_texture('textures/cobblestone.png')
+oak_wood = load_texture('textures/oak_wood.jpg')
+brick = load_texture('textures/brick.png')
 chosen_block = 1
 
 
@@ -20,6 +19,10 @@ def update():
         chosen_block = 1
     elif held_keys['2']:
         chosen_block = 2
+    elif held_keys['3']:
+        chosen_block = 3
+    elif held_keys['4']:
+        chosen_block = 4
 
 
 # Define a Voxel class.
@@ -45,6 +48,10 @@ class Voxel(Button):
                     voxel = Voxel(position=self.position + mouse.normal, texture=dirt)
                 if chosen_block == 2:
                     voxel = Voxel(position=self.position + mouse.normal, texture=cobblestone)
+                if chosen_block == 3:
+                    voxel = Voxel(position=self.position + mouse.normal, texture=oak_wood)
+                if chosen_block == 4:
+                    voxel = Voxel(position=self.position + mouse.normal, texture=brick)
 
             if key == 'left mouse down':
                 destroy(self)
