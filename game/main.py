@@ -8,8 +8,8 @@ from ursina.prefabs.first_person_controller import FirstPersonController
 app = Ursina()
 
 # import the textures
-dirt = load_texture('dirt.jpg')
-cobblestone = load_texture('cobblestone.png')
+dirt = load_texture('textures/dirt.jpg')
+cobblestone = load_texture('textures/cobblestone.png')
 chosen_block = 1
 
 
