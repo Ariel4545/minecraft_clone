@@ -15,7 +15,7 @@ brick = load_texture('textures/brick.png')
 chosen_block = 1
 sky = load_texture('textures/sky-2.jpg')
 arm = load_texture('textures/arm_texture.png')
-punch_sound = Audio('sounds/lego_breaking.mp3', loop=False, autoplay=False)
+punch_sound = Audio('sounds/punch_sound.wav', loop=False, autoplay=False)
 
 
 # a function that always called
